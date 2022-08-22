@@ -137,7 +137,7 @@
                     );
 
                     BABYLON.SceneLoader.Append(
-                        "https://raw.githubusercontent.com/meloturkmen/3d-object/main/model_v6.glb",
+                        "https://raw.githubusercontent.com/meloturkmen/3d-object/main/kup.glb",
                         "",
                         scene,
                         (scene) => {
@@ -153,8 +153,10 @@
                                 var helperCamera = scene.activeCamera;
                                 helperCamera.wheelPrecision = 600;
                                 var limit = helperCamera.lowerRadiusLimit;
-                                helperCamera.lowerRadiusLimit = limit * 50;
-                                helperCamera.upperRadiusLimit = limit * 100;
+                                console.log(helperCamera)
+                                helperCamera.radius = 3
+                                helperCamera.lowerRadiusLimit = limit * 140;
+                                helperCamera.upperRadiusLimit = limit * 300;
                                 helperCamera.panningDistanceLimit = 50;
                                 helperCamera.panningSensibility = 0;
 
@@ -189,10 +191,13 @@
 
                                 var helper = scene.createDefaultEnvironment({
                                     enableGroundMirror: true,
+                                    groundShadowLevel: 0.6,
                                 });
 
-                                helper.setMainColor(new BABYLON.Color4(0.04, 0.03, 0.035));
                                 helper.groundMirror.mirrorPlane.d = 10;
+                                helper._ground.isVisible = false;
+                                helper._skybox.isVisible = false;
+
                                 var reflectionTexture = new BABYLON.HDRCubeTexture(
                                     "https://raw.githubusercontent.com/mkaanztrk/tessthdr/main/urban_street_04_2k.hdr",
                                     scene,
@@ -204,7 +209,9 @@
                                 );
 
                                 scene.environmentTexture = reflectionTexture;
-                                scene.clearColor = new BABYLON.Color3.White();
+                                scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
+                                scene.autoClear = false;
+
 
 
                             } catch (err) {
@@ -230,12 +237,13 @@
 
                     return scene;
                 };
-                var scene = createScene();
-
-                scene.clearColor = new BABYLON.Color4(0, 0, 0, 0.0000000000000001);
+                var scene = createScene()
+                scene.autoClear = false;
+                scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
                 engine.runRenderLoop(function () {
                     scene.render();
+
                 });
                 // Watch for browser/canvas resize events
                 window.addEventListener("resize", function () {
