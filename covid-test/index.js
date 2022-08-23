@@ -137,7 +137,7 @@
                     );
 
                     BABYLON.SceneLoader.Append(
-                        "https://raw.githubusercontent.com/meloturkmen/3d-object/main/kup.glb",
+                        "https://raw.githubusercontent.com/meloturkmen/3d-object/main/covid_test.glb",
                         "",
                         scene,
                         (scene) => {
@@ -145,6 +145,7 @@
                                 var model = scene.meshes[0];
                                 model._scaling._x = -1;
                                 model._scaling._z = 1;
+                                console.log(model)
 
                                 scene.createDefaultCameraOrLight(true, true, true);
                                 scene.activeCamera.useAutoRotationBehavior = false;
@@ -196,7 +197,7 @@
 
                                 helper.groundMirror.mirrorPlane.d = 10;
                                 helper._ground.isVisible = false;
-                                helper._skybox.isVisible = false;
+                                //helper._skybox.isVisible = false;
 
                                 var reflectionTexture = new BABYLON.HDRCubeTexture(
                                     "https://raw.githubusercontent.com/mkaanztrk/tessthdr/main/urban_street_04_2k.hdr",
