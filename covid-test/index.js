@@ -137,15 +137,23 @@
                     );
 
                     BABYLON.SceneLoader.Append(
-                        "https://raw.githubusercontent.com/meloturkmen/3d-object/main/covid_test.glb",
+                        "https://raw.githubusercontent.com/meloturkmen/3d-object/main/covid_test_2.glb",
                         "",
                         scene,
                         (scene) => {
                             try {
+                                //scene.getMaterialByName("pinkkk")._albedoTexture.dispose()
+                                scene.getMaterialByName("pinkkk")._albedoColor = new BABYLON.Color3.FromHexString(this.shadowRoot.host.getAttribute("red_line_color"))
+                                scene.getMaterialByName("pinkkk").alpha = parseInt(this.shadowRoot.host.getAttribute("red_line_opacity") % 100)
+                                scene.getMaterialByName("blueee")._albedoColor = new BABYLON.Color3.FromHexString(this.shadowRoot.host.getAttribute("blue_line_color"))
+                                scene.getMaterialByName("blueee").alpha = parseInt(this.shadowRoot.host.getAttribute("blue_line_opacity") % 100)
+                                var axis = new BABYLON.Vector3(1, 0, 0);
+                                var quaternion = new BABYLON.Quaternion.RotationAxis(axis, 4.75);
                                 var model = scene.meshes[0];
-                                model._scaling._x = -1;
-                                model._scaling._z = 1;
-                                console.log(model)
+                                model.rotationQuaternion = quaternion;
+                                model._scaling._x = 1;
+                                model._scaling._z = -1;
+                                model.scalingDeterminant = 20
 
                                 scene.createDefaultCameraOrLight(true, true, true);
                                 scene.activeCamera.useAutoRotationBehavior = false;
@@ -154,7 +162,6 @@
                                 var helperCamera = scene.activeCamera;
                                 helperCamera.wheelPrecision = 600;
                                 var limit = helperCamera.lowerRadiusLimit;
-                                console.log(helperCamera)
                                 helperCamera.radius = 3
                                 helperCamera.lowerRadiusLimit = limit * 140;
                                 helperCamera.upperRadiusLimit = limit * 300;
@@ -169,27 +176,27 @@
                                     scene
                                 );
                                 //light1.position = new BABYLON.Vector3(6, 9, 3);
-                                light1.intensity = 1;
+                                light1.intensity = 2.9
                                 var light2 = new BABYLON.DirectionalLight(
                                     "light2",
                                     new BABYLON.Vector3(2, -3, 1),
                                     scene
                                 );
                                 //light2.position = new BABYLON.Vector3(6, 9, 3);
-                                light2.intensity = 1;
+                                light2.intensity = 2.5
+
                                 var light3 = new BABYLON.DirectionalLight(
                                     "light3",
-                                    new BABYLON.Vector3(0, -5, 0),
+                                    new BABYLON.Vector3(0, 5, 0),
                                     scene
                                 );
-                                light3.intensity = 0.3;
+                                light3.intensity = 2.5
                                 var light4 = new BABYLON.DirectionalLight(
                                     "light4",
                                     new BABYLON.Vector3(0, 1, 1),
                                     scene
                                 );
-                                light4.intensity = 2;
-
+                                light4.intensity = 2.5
                                 var helper = scene.createDefaultEnvironment({
                                     enableGroundMirror: true,
                                     groundShadowLevel: 0.6,
