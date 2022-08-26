@@ -137,22 +137,21 @@
                     );
 
                     BABYLON.SceneLoader.Append(
-                        "https://raw.githubusercontent.com/meloturkmen/3d-object/main/covid_test_2.glb",
+                        "https://raw.githubusercontent.com/meloturkmen/3d-object/main/CovidTest_v1.glb",
                         "",
                         scene,
                         (scene) => {
                             try {
-                                //scene.getMaterialByName("pinkkk")._albedoTexture.dispose()
-                                scene.getMaterialByName("pinkkk")._albedoColor = new BABYLON.Color3.FromHexString(this.shadowRoot.host.getAttribute("red_line_color"))
-                                scene.getMaterialByName("pinkkk").alpha = parseInt(this.shadowRoot.host.getAttribute("red_line_opacity") % 100)
-                                scene.getMaterialByName("blueee")._albedoColor = new BABYLON.Color3.FromHexString(this.shadowRoot.host.getAttribute("blue_line_color"))
-                                scene.getMaterialByName("blueee").alpha = parseInt(this.shadowRoot.host.getAttribute("blue_line_opacity") % 100)
+                                scene.getMaterialByName("pinkk1")._transparencyMode = 2
+                                scene.getMaterialByName("blinn3")._transparencyMode = 2
+                                scene.getMaterialByName("pinkk1")._albedoColor = new BABYLON.Color3.FromHexString(this.shadowRoot.host.getAttribute("red_line_color"))
+                                scene.getMaterialByName("pinkk1").alpha = parseInt(this.shadowRoot.host.getAttribute("red_line_opacity") % 100)
+                                scene.getMaterialByName("blinn3")._albedoColor = new BABYLON.Color3.FromHexString(this.shadowRoot.host.getAttribute("blue_line_color"))
+                                scene.getMaterialByName("blinn3").alpha = parseInt(this.shadowRoot.host.getAttribute("blue_line_opacity") % 100)
                                 var axis = new BABYLON.Vector3(1, 0, 0);
-                                var quaternion = new BABYLON.Quaternion.RotationAxis(axis, 4.75);
                                 var model = scene.meshes[0];
-                                model.rotationQuaternion = quaternion;
-                                model._scaling._x = 1;
-                                model._scaling._z = -1;
+                                model._scaling._x = -1;
+                                model._scaling._z = 1;
                                 model.scalingDeterminant = 20
 
                                 scene.createDefaultCameraOrLight(true, true, true);
