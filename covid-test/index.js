@@ -137,7 +137,7 @@
                     );
 
                     BABYLON.SceneLoader.Append(
-                        "https://raw.githubusercontent.com/meloturkmen/3d-object/main/CovidTest_v1.glb",
+                        "https://raw.githubusercontent.com/meloturkmen/3d-object/main/CovidTest_v2.glb",
                         "",
                         scene,
                         (scene) => {
